@@ -2,6 +2,4 @@
 
 from .memory import InMemoryStorage
 
-__all__ = [
-    "InMemoryStorage"
-]
+__all__ = ["InMemoryStorage"]
