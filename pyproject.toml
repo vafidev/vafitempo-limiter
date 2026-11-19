@@ -1,0 +1,67 @@
+[project]
+name = "vafitempo-limiter"
+version = "0.1.0"
+description = "Lightweight async rate limiter for Python based on the Token Bucket algorithm"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "vafidev", email = "vladvaskin7@gmail.com" }
+]
+keywords = ["rate-limit", "asyncio", "token-bucket", "fastapi", "redis"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+redis = [
+    "redis>=5.0.0",
+]
+fastapi = [
+    "fastapi>=0.115.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.20,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "pytest-asyncio>=1.5.0",
+    "ruff>=0.17.5",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (сортировка импортов)
+    "B",   # flake8-bugbear (поиск скрытых багов)
+    "UP",  # pyupgrade (современный синтаксис Python)
+    "ASYNC", # flake8-async (ошибки в асинхронном коде)
+]
