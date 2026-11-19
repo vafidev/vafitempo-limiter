@@ -45,7 +45,8 @@ async def test_basic_token_bucket() -> None:
 
 
 async def test_weighted_cost() -> None:
-    storage = InMemoryStorage()
+    clock = FakeClock()
+    storage = InMemoryStorage(clock=clock)
 
     res1 = await storage.acquire("user:1", capacity=5, refill_rate=1.0, cost=4)
     assert res1.allowed is True
@@ -57,7 +58,8 @@ async def test_weighted_cost() -> None:
 
 
 async def test_concurrency_no_race_condition() -> None:
-    storage = InMemoryStorage()
+    clock = FakeClock()
+    storage = InMemoryStorage(clock=clock)
 
     results = await asyncio.gather(
         *(storage.acquire("user:1", capacity=10, refill_rate=0.1) for _ in range(30))
